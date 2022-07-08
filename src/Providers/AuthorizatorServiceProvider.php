@@ -1,5 +1,7 @@
 <?php
 
+namespace Maslennikov\Authorizator\Providers;
+
 use Illuminate\Support\ServiceProvider;
 use Maslennikov\Authorizator\Authorizator;
 use Maslennikov\Authorizator\Models\Role;
