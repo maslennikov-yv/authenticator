@@ -21,7 +21,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Maslennikov\\Authorizator\\Providers\\RoleServiceProvider"
+        "Maslennikov\\Authorizator\\Providers\\AuthorizatorServiceProvider"
       ],
       "aliases": {
         "Authorizator": "Maslennikov\\Authorizator\\Facades\\Authorizator"
