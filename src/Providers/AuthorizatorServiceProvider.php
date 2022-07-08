@@ -24,12 +24,12 @@ class AuthorizatorServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../Config/Authorizator.php' => config_path('Authorizator.php'),
-        ], 'Authorizator-config');
+            __DIR__ . '/../Config/authorizator.php' => config_path('authorizator.php'),
+        ], 'authorizator-config');
 
         $this->publishes([
             __DIR__ . '/../Database/Migrations' => database_path('migrations'),
-        ], 'Authorizator-migrations');
+        ], 'authorizator-migrations');
 
         Role::observe(RoleObserver::class);
     }
