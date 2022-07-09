@@ -30,11 +30,11 @@ class AuthorizatorServiceProvider extends ServiceProvider
         ], 'authorizator-config');
 
         $this->publishes([
-            __DIR__ . '/database/migrations' => database_path('migrations'),
+            __DIR__ . '/../../database/migrations' => database_path('migrations'),
         ], 'authorizator-migrations');
 
         $this->publishes([
-            __DIR__ . '/database/seeders' => database_path('seeders'),
+            __DIR__ . '/../../database/seeders' => database_path('seeders'),
         ], 'authorizator-seeders');
 
         Gate::resource('roles', RolePolicy::class);
