@@ -12,7 +12,7 @@ use Maslennikov\Authorizator\Authorizator as AuthorizatorInstance;
  */
 class Authorizator extends Facade
 {
-    protected static function getFacadeAccessor(): AuthorizatorInstance
+    protected static function getFacadeAccessor(): string
     {
         return 'Authorizator';
     }
