@@ -18,7 +18,7 @@ class RolesTest extends TestCase
     {
         $this->createRoles();
 
-        User::first()->assignRole('marketer');
+        User::first()->assignRole('marketer')->save();
 
         $this->assertSame(1, User::first()->role()->where('slug', 'marketer')->count());
     }
@@ -27,10 +27,10 @@ class RolesTest extends TestCase
     {
         $this->createRoles();
 
-        User::first()->assignRole('marketer');
+        User::first()->assignRole('marketer')->save();
         $this->assertSame(1, User::first()->role()->where('slug', 'marketer')->count());
 
-        User::first()->removeRole();
+        User::first()->removeRole()->save();
         $this->assertSame(0, User::first()->role()->where('slug', 'marketer')->count());
     }
 
@@ -38,7 +38,7 @@ class RolesTest extends TestCase
     {
         $this->createRoles();
 
-        User::first()->assignRole('marketer');
+        User::first()->assignRole('marketer')->save();
         $this->assertSame(1, Role::where(['slug' => 'marketer'])->first()->users()->count());
     }
 

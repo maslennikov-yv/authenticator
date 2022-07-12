@@ -21,19 +21,26 @@ trait HasRole
         return $this->role?->slug;
     }
 
-    public function assignRole(string $slug): void
+    /**
+     * @param string $slug
+     * @return $this
+     */
+    public function assignRole(string $slug): static
     {
         $role = Role::where([
             'slug' => $slug,
         ])->firstOrFail();
         $this->role()->associate($role);
-        $this->save();
+        return $this;
     }
 
-    public function removeRole(): void
+    /**
+     * @return $this
+     */
+    public function removeRole(): static
     {
         $this->role()->dissociate();
-        $this->save();
+        return $this;
     }
 
     public function hasPermission(string $permission): bool

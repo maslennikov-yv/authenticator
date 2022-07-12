@@ -28,7 +28,7 @@ class PermissionsTest extends TestCase
      */
     public function testRolePermissions($role, $permission, $grant)
     {
-        User::first()->assignRole($role);
+        User::first()->assignRole($role)->save();
         $this->assertEquals($grant, User::withRole()->first()->hasPermission($permission));
     }
 
