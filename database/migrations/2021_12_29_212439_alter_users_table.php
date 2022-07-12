@@ -13,9 +13,18 @@ class AlterUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('role_id')->nullable();
-        });
+        if (Schema::hasTable('users')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->foreignId('role_id')->nullable();
+            });
+        } else {
+            // For testcase
+            Schema::create('users', function (Blueprint $table) {
+                $table->uuid('id')->primary();
+                $table->foreignId('role_id')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

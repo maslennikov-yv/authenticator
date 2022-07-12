@@ -15,7 +15,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Maslennikov\\Authorizator\\Test\\": "tests/"
+      "Maslennikov\\Authorizator\\Tests\\": "tests/"
     }
   },
   "extra": {
@@ -35,5 +35,9 @@
     "php": "^8.0.2",
     "maslennikov-yv/laminas-permissions-rbac": "^3.2",
     "laravel/framework": "^9.0"
+  },
+  "require-dev": {
+    "orchestra/testbench": "^7.6",
+    "doctrine/dbal": "^3.3"
   }
 }

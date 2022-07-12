@@ -19,42 +19,31 @@ class Authorizator
     /**
      * @return Rbac
      */
-    public static function getRbac(): Rbac
+    public function getRbac(): Rbac
     {
         if (null === self::$rbac) {
-            self::setRbac();
+            $rbac = new Rbac();
+            foreach (Role::all() as $r) {
+                $role = $this->insureRole($rbac, $r->slug);
+                foreach ($r->children ?? [] as $child) {
+                    $role->addChild(self::insureRole($rbac, $child));
+                }
+                foreach ($r->permissions ?? [] as $permission) {
+                    $role->addPermission($permission);
+                }
+                $rbac->addRole($role);
+            }
+            self::$rbac = $rbac;
         }
         return self::$rbac;
     }
 
     /**
-     * @param Rbac|null $rbac
-     * @return void
-     */
-    public static function setRbac(Rbac $rbac = null): void
-    {
-        if ($rbac == null) {
-            $rbac = new Rbac();
-            foreach (Role::all() as $r) {
-                $role = self::insureRole($rbac, $r->slug);
-                foreach ($r->children ?? [] as $child) {
-                    $role->addChild(self::insureRole($rbac, $child));
-                }
-                foreach ($r->permissions ?? [] as $permission) {
-                    $$role->addPermission($permission);
-                }
-                $rbac->addRole($role);
-            }
-        }
-        self::$rbac = $rbac;
-    }
-
-    /**
      * @param string $slug
      * @param string $permission
-     * @return void
+     * @return bool
      */
-    public function hasPermission(string $slug, string $permission)
+    public function hasPermission(string $slug, string $permission): bool
     {
         return $this->getRbac()->getRole($slug)->hasPermission($permission);
     }
@@ -68,7 +57,7 @@ class Authorizator
 
             $child = $this->insureRole($rbac, $child_slug);
 
-            if ($role->checkCircularReferences($child)) {
+            if (!$role->checkCircularReferences($child)) {
                 $role->addChild($child);
             } else {
                 $circularReferences[] = $child_slug;
@@ -77,7 +66,6 @@ class Authorizator
         }
         return $circularReferences;
     }
-
 
     /**
      * @return $this
@@ -99,7 +87,7 @@ class Authorizator
     /**
      * @param Rbac $rbac
      * @param string $slug
-     * @return \Laminas\Permissions\Rbac\RoleInterface
+     * @return RoleInterface
      */
     private function insureRole(Rbac $rbac, string $slug): RoleInterface
     {
