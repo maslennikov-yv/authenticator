@@ -71,31 +71,37 @@ class TestCase extends OrchestraTestCase
         collect([
             [
                 'slug' => 'user',
+                'name' => 'User',
                 'children' => null,
                 'permissions' => ['blog.view'],
             ],
             [
                 'slug' => 'content',
+                'name' => 'Content manager',
                 'children' => ['user'],
                 'permissions' => ['blog.create', 'blog.edit', 'blog.delete'],
             ],
             [
                 'slug' => 'editor',
+                'name' => 'Editor',
                 'children' => ['content'],
                 'permissions' => ['blog.publish'],
             ],
             [
                 'slug' => 'manager',
+                'name' => 'Manager',
                 'children' => ['user'],
                 'permissions' => ['user.manage'],
             ],
             [
                 'slug' => 'admin',
+                'name' => 'Administrator',
                 'children' => ['editor', 'manager'],
                 'permissions' => null,
             ],
             [
                 'slug' => 'guest',
+                'name' => 'Guest',
                 'children' => null,
                 'permissions' => null,
             ],
@@ -103,6 +109,7 @@ class TestCase extends OrchestraTestCase
             Role::create(
                 [
                     'slug' => $row['slug'],
+                    'name' => $row['name'],
                     'children' => $row['children'],
                     'permissions' => $row['permissions'],
                 ]

@@ -46,10 +46,12 @@ class RolesTest extends TestCase
     {
         Role::create([
             'slug' => 'marketer',
+            'name' => 'Marketer',
         ]);
 
         Role::create([
             'slug' => 'contributor',
+            'name' => 'Contributor',
         ]);
     }
 }

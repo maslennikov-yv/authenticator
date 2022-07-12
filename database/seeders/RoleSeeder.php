@@ -14,11 +14,13 @@ class RoleSeeder extends Seeder
     protected $rows = [
         [
             'slug' => 'role-manager',
+            'name' => 'Role manager',
             'children' => null,
             'permissions' => ['roles.view', 'roles.viewAny', 'roles.viewAny', 'roles.create', 'roles.update', 'roles.delete'],
         ],
         [
             'slug' => 'admin',
+            'name' => 'Administrator',
             'children' => ['role-manager'],
             'permissions' => null,
         ],
@@ -35,6 +37,7 @@ class RoleSeeder extends Seeder
             Role::create(
                 [
                     'slug' => $row['slug'],
+                    'name' => $row['name'],
                     'children' => $row['children'],
                     'permissions' => $row['permissions'],
                 ]
