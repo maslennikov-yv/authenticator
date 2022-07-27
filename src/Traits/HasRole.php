@@ -22,11 +22,15 @@ trait HasRole
     }
 
     /**
-     * @param string $slug
+     * @param string|null $slug
      * @return $this
      */
-    public function assignRole(string $slug): static
+    public function assignRole(?string $slug): static
     {
+        if ($slug === null) {
+            $this->role()->dissociate();
+            return $this;
+        }
         $role = Role::where([
             'slug' => $slug,
         ])->firstOrFail();
