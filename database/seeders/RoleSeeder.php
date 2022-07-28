@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
             'slug' => 'role-manager',
             'name' => 'Role manager',
             'children' => null,
-            'permissions' => ['roles.view', 'roles.viewAny', 'roles.viewAny', 'roles.create', 'roles.update', 'roles.delete'],
+            'permissions' => ['roles.view', 'roles.viewAny', 'roles.create', 'roles.update', 'roles.delete'],
         ],
         [
             'slug' => 'admin',
