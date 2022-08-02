@@ -10,6 +10,7 @@ use Maslennikov\Authorizator\Authorizator as AuthorizatorInstance;
  * @method static bool hasPermission(string $slug, string $permission)
  * @method static AuthorizatorInstance flush()
  * @method static string roleModel()
+ * @method static string[] getPermissions()
  */
 class Authorizator extends Facade
 {

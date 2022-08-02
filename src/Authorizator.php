@@ -97,7 +97,7 @@ class Authorizator
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getPermissions(): array
     {
