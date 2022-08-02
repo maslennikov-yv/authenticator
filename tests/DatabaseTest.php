@@ -2,7 +2,7 @@
 
 namespace Maslennikov\Authorizator\Tests;
 
-use Maslennikov\Authorizator\Models\Role;
+use Maslennikov\Authorizator\Facade\Authorizator;
 
 class DatabaseTest extends TestCase
 {
@@ -13,11 +13,11 @@ class DatabaseTest extends TestCase
     public function testDatabaseContainsTestUsers()
     {
         $this->assertSame(1, User::all()->count());
-        $this->assertSame(1, Role::where('slug', 'user')->count());
-        $this->assertSame(1, Role::where('slug', 'content')->count());
-        $this->assertSame(1, Role::where('slug', 'editor')->count());
-        $this->assertSame(1, Role::where('slug', 'manager')->count());
-        $this->assertSame(1, Role::where('slug', 'admin')->count());
-        $this->assertSame(1, Role::where('slug', 'guest')->count());
+        $this->assertSame(1, Authorizator::roleModel()::where('slug', 'user')->count());
+        $this->assertSame(1, Authorizator::roleModel()::where('slug', 'content')->count());
+        $this->assertSame(1, Authorizator::roleModel()::where('slug', 'editor')->count());
+        $this->assertSame(1, Authorizator::roleModel()::where('slug', 'manager')->count());
+        $this->assertSame(1, Authorizator::roleModel()::where('slug', 'admin')->count());
+        $this->assertSame(1, Authorizator::roleModel()::where('slug', 'guest')->count());
     }
 }

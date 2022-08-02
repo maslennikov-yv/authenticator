@@ -2,10 +2,9 @@
 
 namespace Maslennikov\Authorizator\Tests;
 
-use Illuminate\Support\Str;
-use Orchestra\Testbench\TestCase as OrchestraTestCase;
-use Maslennikov\Authorizator\Models\Role;
+use Maslennikov\Authorizator\Facade\Authorizator;
 use Maslennikov\Authorizator\Providers\AuthorizatorServiceProvider;
+use Orchestra\Testbench\TestCase as OrchestraTestCase;
 
 class TestCase extends OrchestraTestCase
 {
@@ -106,7 +105,7 @@ class TestCase extends OrchestraTestCase
                 'permissions' => null,
             ],
         ])->each(function (array $row) {
-            Role::create(
+            Authorizator::roleModel()::create(
                 [
                     'slug' => $row['slug'],
                     'name' => $row['name'],

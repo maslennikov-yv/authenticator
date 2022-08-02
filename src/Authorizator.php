@@ -5,16 +5,14 @@ namespace Maslennikov\Authorizator;
 use Illuminate\Support\Facades\Gate;
 use Laminas\Permissions\Rbac\Rbac;
 use Laminas\Permissions\Rbac\RoleInterface;
-use Maslennikov\Authorizator\Models\Role;
 
 class Authorizator
 {
     /** @var Rbac */
     private static $rbac;
 
-    public function __construct()
-    {
-    }
+    /** @var string */
+    public static string $roleModel = 'Maslennikov\\Authorizator\\Models\\Role';
 
     /**
      * @return Rbac
@@ -23,7 +21,7 @@ class Authorizator
     {
         if (null === self::$rbac) {
             $rbac = new Rbac();
-            foreach (Role::all() as $r) {
+            foreach (self::roleModel()::all() as $r) {
                 $role = $this->insureRole($rbac, $r->slug);
                 foreach ($r->children ?? [] as $child) {
                     $role->addChild(self::insureRole($rbac, $child));
@@ -39,6 +37,23 @@ class Authorizator
     }
 
     /**
+     * @param $model
+     * @return void
+     */
+    public static function useRoleModel($model): void
+    {
+        static::$roleModel = $model;
+    }
+
+    /**
+     * @return string
+     */
+    public static function roleModel(): string
+    {
+        return static::$roleModel;
+    }
+
+    /**
      * @param string $slug
      * @param string $permission
      * @return bool
@@ -48,6 +63,11 @@ class Authorizator
         return $this->getRbac()->getRole($slug)->hasPermission($permission);
     }
 
+    /**
+     * @param string $slug
+     * @param array $children
+     * @return array
+     */
     public function checkCircularReferences(string $slug, array $children): array
     {
         $circularReferences = [];

@@ -5,7 +5,6 @@ namespace Maslennikov\Authorizator\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Maslennikov\Authorizator\Authorizator;
-use Maslennikov\Authorizator\Models\Role;
 use Maslennikov\Authorizator\Observers\RoleObserver;
 use Maslennikov\Authorizator\Policies\RolePolicy;
 
@@ -39,7 +38,7 @@ class AuthorizatorServiceProvider extends ServiceProvider
 
         Gate::resource('roles', RolePolicy::class);
 
-        Role::observe(RoleObserver::class);
+        Authorizator::roleModel()::observe(RoleObserver::class);
     }
 
 }

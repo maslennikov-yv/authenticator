@@ -9,6 +9,7 @@ use Maslennikov\Authorizator\Authorizator as AuthorizatorInstance;
  * @method static array checkCircularReferences(string $slug, array $children)
  * @method static bool hasPermission(string $slug, string $permission)
  * @method static AuthorizatorInstance flush()
+ * @method static string roleModel()
  */
 class Authorizator extends Facade
 {

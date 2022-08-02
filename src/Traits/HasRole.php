@@ -5,13 +5,12 @@ namespace Maslennikov\Authorizator\Traits;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Maslennikov\Authorizator\Facade\Authorizator;
-use Maslennikov\Authorizator\Models\Role;
 
 trait HasRole
 {
     public function role(): BelongsTo
     {
-        return $this->belongsTo(Role::class)->withDefault([
+        return $this->belongsTo(Authorizator::roleModel())->withDefault([
             'slug' => 'guest',
         ]);
     }
@@ -31,7 +30,7 @@ trait HasRole
             $this->role()->dissociate();
             return $this;
         }
-        $role = Role::where([
+        $role = Authorizator::roleModel()::where([
             'slug' => $slug,
         ])->firstOrFail();
         $this->role()->associate($role);

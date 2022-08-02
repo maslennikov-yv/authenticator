@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Maslennikov\Authorizator\Models\Role;
+use Maslennikov\Authorizator\Facade\Authorizator;
 
 class RoleSeeder extends Seeder
 {
@@ -34,7 +34,7 @@ class RoleSeeder extends Seeder
     public function run()
     {
         collect($this->rows)->each(function (array $row) {
-            Role::create(
+            Authorizator::roleModel()::create(
                 [
                     'slug' => $row['slug'],
                     'name' => $row['name'],

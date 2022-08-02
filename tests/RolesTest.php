@@ -2,7 +2,7 @@
 
 namespace Maslennikov\Authorizator\Tests;
 
-use Maslennikov\Authorizator\Models\Role;
+use Maslennikov\Authorizator\Facade\Authorizator;
 
 class RolesTest extends TestCase
 {
@@ -10,8 +10,8 @@ class RolesTest extends TestCase
     {
         $this->createRoles();
 
-        $this->assertSame(1, Role::where('slug', 'marketer')->count());
-        $this->assertSame(1, Role::where('slug', 'contributor')->count());
+        $this->assertSame(1, Authorizator::roleModel()::where('slug', 'marketer')->count());
+        $this->assertSame(1, Authorizator::roleModel()::where('slug', 'contributor')->count());
     }
 
     public function testRolesCanBeAssigned()
@@ -39,17 +39,17 @@ class RolesTest extends TestCase
         $this->createRoles();
 
         User::first()->assignRole('marketer')->save();
-        $this->assertSame(1, Role::where(['slug' => 'marketer'])->first()->users()->count());
+        $this->assertSame(1, Authorizator::roleModel()::where(['slug' => 'marketer'])->first()->users()->count());
     }
 
     private function createRoles()
     {
-        Role::create([
+        Authorizator::roleModel()::create([
             'slug' => 'marketer',
             'name' => 'Marketer',
         ]);
 
-        Role::create([
+        Authorizator::roleModel()::create([
             'slug' => 'contributor',
             'name' => 'Contributor',
         ]);

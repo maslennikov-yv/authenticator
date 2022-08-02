@@ -3,17 +3,17 @@
 namespace Maslennikov\Authorizator\Observers;
 
 use Maslennikov\Authorizator\Facade\Authorizator;
-use Maslennikov\Authorizator\Models\Role;
+use Illuminate\Database\Eloquent\Model;
 
 class RoleObserver
 {
     /**
      * Handle the Role "created" event.
      *
-     * @param Role $role
+     * @param Model $role
      * @return void
      */
-    public function created(Role $role): void
+    public function created(Model $role): void
     {
         self::flush();
     }
@@ -21,10 +21,10 @@ class RoleObserver
     /**
      * Handle the Role "updated" event.
      *
-     * @param Role $role
+     * @param Model $role
      * @return void
      */
-    public function updated(Role $role): void
+    public function updated(Model $role): void
     {
         self::flush();
     }
@@ -32,10 +32,10 @@ class RoleObserver
     /**
      * Handle the Role "deleted" event.
      *
-     * @param Role $role
+     * @param Model $role
      * @return void
      */
-    public function deleted(Role $role): void
+    public function deleted(Model $role): void
     {
         self::flush();
     }
@@ -43,10 +43,10 @@ class RoleObserver
     /**
      * Handle the Role "restored" event.
      *
-     * @param Role $role
+     * @param Model $role
      * @return void
      */
-    public function restored(Role $role): void
+    public function restored(Model $role): void
     {
         self::flush();
     }
@@ -54,10 +54,10 @@ class RoleObserver
     /**
      * Handle the Role "force deleted" event.
      *
-     * @param Role $role
+     * @param Model $role
      * @return void
      */
-    public function forceDeleted(Role $role): void
+    public function forceDeleted(Model $role): void
     {
         self::flush();
     }
